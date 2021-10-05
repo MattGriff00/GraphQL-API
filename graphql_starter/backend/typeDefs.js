@@ -6,8 +6,30 @@ const typeDefs = gql`
     id: ID
     completed: Boolean
   }
+
+  input fetchTaskFilter {
+    id: ID!
+  }
+
+  input addTaskInput {
+    name: String!
+    completed: Boolean!
+  }
+
+  input updateTaskInput {
+    id: ID!
+    name: String
+    completed: Boolean
+  }
+
   type Query {
-    fetchTasks: Tasks
+    fetchTask(filter: fetchTaskFilter): Tasks
+    fetchTasks: [Tasks]
+  }
+
+  type Mutation {
+    addTask(input: addTaskInput): Tasks
+    updateTask(input: updateTaskInput): Tasks
   }
 `;
 
